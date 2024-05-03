@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SmokeSuite">
+    <parameter name="browserType" value="firefox"></parameter>
+    <test name="LoginTests">
+        <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+        <classes>
+            <class name="com.sip.WebTests.LoginTests"></class>
+        </classes>
+    </test>
+</suite>
