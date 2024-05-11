@@ -3,26 +3,24 @@ package com.sip.Base;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
+
+import static com.sip.Base.WebDriverFactory.*;
+
 public class SIPBase {
-    public WebDriver driver;
-    WebDriverFactory webDriverFactory;
 
-    @Parameters("browserType")
-    @BeforeSuite
-    public void initialize(String browserType){
-        webDriverFactory = new WebDriverFactory(driver);
-        driver = webDriverFactory.intializeBrowser(browserType);
-    }
-
-    @Parameters("url")
+    @Parameters({"browserType","url"})
     @BeforeTest
-    public void launchApplication(String url){
-        driver.get(url);
+    public void initialize(String browserType, String url) throws MalformedURLException {
+        WebDriver driver = setBrowser(browserType);
+        threadLocal.set(driver);
+        getDriver().get(url);
     }
 
-    @AfterSuite
+    @AfterTest
     public void killSession(){
-        driver.quit();
+        getDriver().quit();
+        threadLocal.remove();
     }
 
 }

@@ -11,13 +11,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.sip.Base.WebDriverFactory.getDriver;
+
 public class LoginTests extends SIPBase {
     LoginPage loginPage;
     AllProductsPage allProductsPage;
     @BeforeTest
     public void intializePages(){
-        loginPage = new LoginPage(driver);
-        allProductsPage = new AllProductsPage(driver);
+        loginPage = new LoginPage(getDriver());
+        allProductsPage = new AllProductsPage(getDriver());
     }
 
     @Test

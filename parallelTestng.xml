@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SmokeSuite" parallel="tests">
+
+    <test name="Chrome Tests">
+        <parameter name="browserType" value="chrome"></parameter>
+        <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+        <classes>
+            <class name="com.sip.WebTests.LoginTests"></class>
+        </classes>
+    </test>
+
+    <test name="Firefox tests">
+        <parameter name="browserType" value="firefox"></parameter>
+        <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+        <classes>
+            <class name="com.sip.WebTests.LoginTests"></class>
+        </classes>
+    </test>
+
+    <test name="edge tests">
+        <parameter name="browserType" value="edge"></parameter>
+        <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+        <classes>
+            <class name="com.sip.WebTests.LoginTests"></class>
+        </classes>
+    </test>
+
+    <test name="safari tests">
+        <parameter name="browserType" value="safari"></parameter>
+        <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+        <classes>
+            <class name="com.sip.WebTests.LoginTests"></class>
+        </classes>
+    </test>
+
+</suite>

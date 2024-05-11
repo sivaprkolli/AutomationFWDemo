@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="SmokeSuite">
-    <parameter name="browserType" value="firefox"></parameter>
-    <test name="LoginTests">
-        <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+<suite name="All Test Suite" parallel="tests" thread-count="4">
+
+    <test verbose="2" preserve-order="true" name="Smoke1">
+        <parameter name="browserName" value="chrome"></parameter>
         <classes>
-            <class name="com.sip.WebTests.LoginTests"></class>
+            <class name="com.sip.WebTests.ParallelTest">
+                <methods>
+                    <include name="verifyLoginSuccessful"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test verbose="2" preserve-order="true" name="Smoke2">
+        <parameter name="browserName" value="firefox"></parameter>
+        <classes>
+            <class name="com.sip.WebTests.ParallelTest">
+                <methods>
+                    <include name="verifyLoginSuccessful"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test verbose="2" preserve-order="true" name="Smoke3">
+        <parameter name="browserName" value="safari"></parameter>
+        <classes>
+            <class name="com.sip.WebTests.ParallelTest">
+                <methods>
+                    <include name="verifyLoginSuccessful"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test verbose="2" preserve-order="true" name="Smoke4">
+        <parameter name="browserName" value="edge"></parameter>
+        <classes>
+            <class name="com.sip.WebTests.ParallelTest">
+                <methods>
+                    <include name="verifyLoginSuccessful"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
