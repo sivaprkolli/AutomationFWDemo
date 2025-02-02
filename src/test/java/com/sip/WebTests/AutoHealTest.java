@@ -14,6 +14,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 //https://github.com/healenium/healenium-example-maven
+
+// docker compose up
 public class AutoHealTest {
     // public static WebDriver selfHealingDriver;
     // public static SelfHealingDriver driver;
@@ -28,17 +30,17 @@ public class AutoHealTest {
 //        desiredCapabilities.setPlatform(Platform.MAC);
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.merge(desiredCapabilities);
-        //WebDriver delegate = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
-        WebDriver delegate = new ChromeDriver(chromeOptions);
+        WebDriver delegate = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+        //WebDriver delegate = new ChromeDriver(chromeOptions);
         driver = SelfHealingDriver.create(delegate);
 
         driver.get("https://www.saucedemo.com/");
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
         driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         driver.findElement(By.id("login-button")).click();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         driver.quit();
     }
 }
