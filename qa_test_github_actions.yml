@@ -1,0 +1,51 @@
+name: QA-Manual Run Test Automation Suite
+
+env:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  JAVA_HOME: "C:\\Program Files\\Java\\jdk-11"
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment'
+        required: true
+        default: 'QA'
+        type: choice
+        options:
+          - QA
+
+      browser:
+        description: 'Select the Browser'
+        required: true
+        default: 'edge'
+        type: choice
+        options:
+          - chrome
+          - firefox
+          - edge
+
+      # Add single tag/ test case id or to run automation suite with multiple tags add "or" in between 2 tags.
+      TCToRun:
+        description: "Enter single tag like @Smoke or multiple like @Regression or @Nationwide"
+        required: true
+
+jobs:
+  build-verify:
+    runs-on: [ self-hosted, Project_Runner ]
+    timeout-minutes: 1200
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java environment
+        run: |
+          echo "Setup environment"
+          $env:JAVA_HOME=$env:GITHUB_JAVA8_HOME
+          $env:PATH=$env:JAVA_HOME + "/bin;" + $env:PATH
+
+      - name: Running Automation Test cases
+        run: |        
+          mvn $MAVEN_CLI_OPTS clean verify -Denv="${{ github.event.inputs.environment }}" -Dbrowser="${{ github.event.inputs.browser }}" -Dtest=TestRunner "-Dcucumber.filter.tags=${{github.event.inputs.TCToRun}}"
+          echo "***** Running integration tests on CSH site and environment is ***** ${{ github.event.inputs.environment }}"
