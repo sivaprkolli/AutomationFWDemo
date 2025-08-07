@@ -45,8 +45,9 @@ public class AutoHealTest {
         driver.get("https://www.saucedemo.com/");
         driver.manage().window().maximize();
         Thread.sleep(2000);
+        String name = "Username";
         try {
-            driver.findElement(By.xpath("//form/div/input[@placeholder='Username']")).sendKeys("standard_user");
+            driver.findElement(By.xpath("//form/div/input[@placeholder='"+name+"']")).sendKeys("standard_user");
         }catch (NoSuchElementException nse){
             driver.findElement(By.id("test1426531")).sendKeys("standard_user");
         }
